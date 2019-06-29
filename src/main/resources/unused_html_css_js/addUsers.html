@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>AddUsers</title>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1 id="intro">Hello Administrator</h1>
+
+    <a href="hello">Ga naar hoofdmenu</a>
+
+    <p>Enter new Username</p>
+    <input type="text" id="name">
+    <p>Enter new user mailadress</p>
+    <input type="text" id="mailadress">
+    <p>Enter roleName of new User</p>
+    <input type="text" id="roleName">
+    <button id="buttonAddUser">Set</button>
+
+    <p id="description"></p>
+    <p id="namedisplay"></p>
+    <p id="maildisplay"></p>
+    <p id="roledisplay"></p>
+
+</div>
+</body>
+<!--<script src="/static/javascripts/addUser.javascripts">-->
+<script>
+    function app() {
+        function printUserInfo() {
+            var newUserName = document.getElementById("name").value;
+            var newUserRole = document.getElementById("roleName").value;
+            var newUserMailadress = document.getElementById("mailadress").value;
+
+            document.getElementById("description").innerHTML = "Dit zijn de gegevens van de nieuw aan te maken gebruiker";
+            document.getElementById("namedisplay").innerHTML = newUserName;
+            document.getElementById("maildisplay").innerHTML = newUserMailadress;
+            document.getElementById("roledisplay").innerHTML = newUserRole;
+        }
+        document.getElementById("buttonAddUser").onclick = printUserInfo;
+
+    }
+    window.onload = app;
+</script>
+</html>

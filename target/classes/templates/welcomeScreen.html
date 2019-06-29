@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mijn Inzet: Welkom</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logo.css}"/>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body class="text-center" onload="oneOrMoreRoles()">
+<!-- Navigatie-menu -->
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+
+<br><br><br>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <div class="jumbotron">
+
+                <img th:src="@{/images/logoo.jpg} " th:width="200px" th:height="200px">
+            </div>
+        </div>
+    </header>
+
+    <main roleName="main" class="inner cover">
+        <h2 class="cover-heading">Welkom </h2>
+        <h2 STYLE="color: blue"><span th:text="${user.toString()}"></span></h2>
+        
+        <h2 style="color:#2E3279 ">Selecteer een scherm: </h2>
+        <nav class="nav nav-masthead justify-content-center">
+        </nav>
+    </main>
+
+</div>
+<div class="container">
+    <div class="row">
+        <div id="ADMIN" class="col" style="display:none;">
+            <a id="goToAdmin" href="/helloAdmin" class="btn  btn-primary">ADMINISTRATEUR</a>
+        </div>
+        <div id="COORDINATOR" class="col" style="display:none">
+            <a id="goToCoord" href="/helloCoordinator" class="btn btn-primary">COORDINATOR</a>
+        </div>
+        <div id="TEACHER" class="col" style="display:none;">
+            <a id="goToTeacher" href="/helloTeacher" class="btn btn-primary">DOCENT</a>
+        </div>
+        <div id="SCHEDULER" class="col" style="display:none;">
+            <a id="goToScheduler" href="/helloScheduler" class="btn  btn-primary">ROOSTERAAR</a>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    var roleArray = [[${roles}]];
+
+    function oneOrMoreRoles() {
+        if (roleArray.length === 1) {
+            if (roleArray[0] === "COORDINATOR" || roleArray[0] === "MANAGER") document.getElementById("goToCoord").click();
+            else if (roleArray[0] === "SCHEDULER") document.getElementById("goToScheduler").click();
+            else if (roleArray[0] === "ADMIN") document.getElementById("goToAdmin").click();
+            else if (roleArray[0] === "TEACHER") document.getElementById("goToTeacher").click();
+        } else {
+            showButton();
+        }
+    }
+
+    function showButton() {
+        for (var i = 0; i < roleArray.length; i++) {
+            if (roleArray[i] === "ADMIN") document.getElementById("ADMIN").style.display = "inline-block";
+            else if (roleArray[i] === "SCHEDULER") document.getElementById("SCHEDULER").style.display = "inline-block";
+            else if (roleArray[i] === "COORDINATOR" || roleArray[i] === "MANAGER")
+                document.getElementById("COORDINATOR").style.display = "inline-block";
+            else if (roleArray[i] === "TEACHER") document.getElementById("TEACHER").style.display = "inline-block";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mijn Inzet: Sollicitaties</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloTeacher">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/teacherFTE">MIJN ROOSTER</a></li>
+                    <li><a href="/showTasks">VACATURBEHEER</a></li>
+                    <li><a href="/applicationBasket">SOLLICITATIES</a></li>
+                    <li class="dropdown">
+                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle" data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK & ROOSTER VOORKEUREN <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
+                            <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/exception/list">INCIDENTEN</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+
+<div class="container">
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
+        <h3 class="Vacatures">SOLLICITATIES</h3>
+
+        <thead style="background-color: #555D9C;color: white;!important;">
+        <tr>
+            <th>Taak_ID</th>
+            <th>Taakbeschrijving</th>
+            <th>Begrootte uren</th>
+            <th>Naam sollicitant</th>
+            <th>Datum sollicitatie</th>
+            <th>Opgegeven uren wijzigen</th>
+            <th>Uren opslaan</th>
+            <th>Sollicitatie annuleren</th>
+
+        </tr>
+        </thead>
+
+
+        <tbody>
+        <tr th:each="appl:${applicationBasket}">
+            <form name="applicationForm" th:id="${appl[0]}" th:action="@{/taskApplications/taskId/fullName/availHours}" method="post" onsubmit="return validate()">
+
+                <td>
+                    <input type="${appl[0]}" NAME ="taskId" id= "taskId" style="background-color:
+                    transparent;border: #FF1C19" th:value="${appl[0]}" size="4" readonly/>
+                </td>
+                <td th:text="${appl[1]}">TaskName</td>
+                <td th:text="${appl[2]}">esthours</td>
+                <td>
+                    <input type="${appl[3]}" NAME ="fullName" id= "fullName" style="background-color:
+                    transparent;border: #FF1C19" th:value="${appl[3]}" size="20" readonly/>
+                </td>
+                <td th:text="${appl[4]}">applDate</td>
+                <td>
+                    <input TYPE="text" NAME ="availHours" id="availHours" th:value="${appl[5]}" SIZE="11" th:form = "${appl[0]}" style="background-color: transparent;
+                       border-color: brown;border-style:solid;text-align: center"  />
+                </td>
+                <td>
+                    <div>
+                        <button type="submit" class="btn btn-info" th:value="updateAppl" name="updateAppl"
+                                th:id="${appl[0]}" th:form ="${appl[0]}">OPSLAAN</button>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <button type="submit" class="btn btn-danger" th:value="removeAppl" name="removeAppl"
+                                th:id="${appl[0]}" th:form ="${appl[0]}">ANNULEER</button>
+                    </div>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>

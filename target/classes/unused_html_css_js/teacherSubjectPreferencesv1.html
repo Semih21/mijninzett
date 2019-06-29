@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" type="text/css" th:href="mystyle.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <title>Mijn Inzet: Vakkenvoorkeur</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloTeacher">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/teacherFTE">MIJN ROOSTER</a></li>
+                    <li><a href="/showTasks">VACATURBEHEER</a></li>
+                    <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
+                    <li class="dropdown">
+                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle"
+                           data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK
+                            &
+                            ROOSTER VOORKEUREN <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
+                            <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/applicationBasket">INCIDENTEN</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<div class="container">
+    <form name="subjectform" id="myForm" action="#" th:action="@{/submitPreferences}" method="post">
+        <h5 class="Vakkenvoorkeur">Klik op de buttons rechts om je voorkeur op te geven</h5>
+        <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
+            <thead style="background-color: #555D9C;color: white;!important;">
+            <tr>
+                <th>Vaknummer</th>
+                <th>Vak</th>
+                <th>Begrootte Uren</th>
+                <th>Geldigheidsduur (jaren)</th>
+                <th>Geef voorkeur op</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entr:${showSubjectsWithPreference}">
+                <td th:text="${entr.getKey().getSubjectId()}">-1</td>
+                <td th:text="${entr.getKey().getSubjectName()}">-1</td>
+                <td th:text="${entr.getKey().getEstimatedHours()}">-1</td>
+                <td th:text="${entr.getKey().yearsToExpiryDate}">-1</td>
+                <td>
+                    <input type="hidden" th:value="${entr.getValue()}" id="checked"/>
+                    <input type="hidden" th:value="${entr.getKey().getSubjectId()}" id="subjectId"/>
+                    <input id='optie1' type="radio" th:name="${entr.getKey().getSubjectName()}"
+                           th:id="|${entr.getKey().getSubjectId()}optie1|"
+                           value=1> ik geef dit vak liever niet.
+                    <br>
+                    <input id='optie2' type="radio" th:name="${entr.getKey().getSubjectName()}"
+                           th:id="|${entr.getKey().getSubjectId()}optie2|"
+                           value=2> ja, dit vak wil ik geven.
+                    <br>
+                    <input id='optie3' type="radio" th:name="${entr.getKey().getSubjectName()}"
+                           th:id="|${entr.getKey().getSubjectId()}optie3|"
+                           value=3> ja, Ik heb het vak al eerder gegeven.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <button type="submit" form="myForm" class="btn btn-lg btn-success">Sla je voorkeuren op</button>
+</div>
+
+<script th:inline="javascript">
+    var preference = document.getElementById('checked');
+    var subjectId = document.getElementById('subjectId');
+    var map = [[${showSubjectsWithPreference}]];
+
+    console.log(map);
+    console.log("scriptrunning");
+    console.log("subnectId" + subjectId);
+    console.log("preference" + preference);
+    console.log("Mapresult:");
+    var value = map[subjectId];
+
+    determineRadioChecked(preference);
+
+    function determineRadioChecked(value) {
+        console.log("checkedFunction aangeroepen");
+        if (value === 1) {
+            document.getElementById('1optie1').checked = true;
+        } else if (value === 2) {
+            document.getElementById('1optie2').checked = true;
+        } else if (value === 3) {
+            document.getElementById("1optie3").checked = true;
+        } else {
+            document.getElementById("1optie1").checked = false;
+            document.getElementById("1optie2").checked = false;
+            document.getElementById("1optie3").checked = false;// default
+        }
+    }
+</script>
+</body>
+</html>

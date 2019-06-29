@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mijn Inzet: Vakken</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SELECTEER VAKKEN IN DIT COHORT </a>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a class="nav-link" href=#></a></li>
+                    <li><a class="nav-link" href=#></a></li>
+                    <li><a class="nav-link" href=#></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+
+    <div class="table-responsive col-10">
+        <table class="table table-bordered table-striped" style="background-color: #d7e2e9">
+            <h3 class="cohortBeheerTable">COHORT VAKKEN PLANNING</h3>
+            <tablehead>
+                <thead class="thead-dark">
+                <tr>
+                    <th>cohort</th>
+                    <th>datum</th>
+                    <th>dag</th>
+                    <th>dagdeel</th>
+                    <th>planning</th>
+                    <th>planning opslaan</th>
+
+                </tr>
+                </thead>
+            </tablehead>
+
+            <tablebody>
+                <tr th:each="schedule:${cohortsSchedules}" th:data-ID="${schedule.getId()}" th:id="tr_tag">
+                    <form id="${schedule.getId()}" action="#" th:action="@{/subjectCohortCoupeling}"
+                          th:object="${cohortsSchedules}"
+                          method="post">
+
+                        <td>
+                            <input th:with="cohort=${schedule.getCohort().getCohortId()}" type="${schedule}"
+                                   class="cohort"
+                                   NAME="cohort" th:data-ID="${schedule.getId()}" th:id="cohort" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getCohort().getCohortId()}"
+                                   th:field="${cohort}" readonly/>
+                        </td>
+
+                        <td>
+                            <input th:with="dateDay=${schedule.getId()}" type="${schedule}" class="date" NAME="date"
+                                   th:data-ID="${schedule.getId()}" th:id="dateDay" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDate()}" th:field="${date}" readonly/>
+                        </td>
+
+                        <td>
+                            <input th:with="day=${schedule.getId()}" type="${schedule}" class="day" NAME="day"
+                                   th:data-ID="${schedule.getId()}" th:id="day" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDay()}" th:field="${day}" readonly/>
+                        </td>
+
+                        <td>
+                            <input th:with="datepart=${schedule.getId()}" type="${schedule}" class="daypart"
+                                   NAME="daypart"
+                                   th:data-ID="${schedule.getId()}" th:id="daypart" style="background-color:
+                        transparent;border: #FF1C19" th:value="${schedule.getDaypart()}" th:field="${daypart}"
+                                   readonly/>
+                        </td>
+
+                        <td>
+                            <form>
+                                <div th:switch="${schedule.getSubject()}">
+                                    <select th:id="subjectVariable" class="subjectField"
+                                            th:data-id="${schedule.getId()}" th:value="opslaan" name="opslaan"
+                                            th:form="${schedule.getId()}">
+                                        <option th:case="null" selected="selected">selecteer vak</option>
+                                        <option th:case="*" th:text="${schedule.getSubject().subjectName}"
+                                                th:value="${schedule.getSubject().subjectId}" selected="selected">
+                                        <option th:each="subject: ${subjects}" th:value="${subject.subjectId}"
+                                                th:text="${subject.subjectName}">
+                                    </select>
+                                </div>
+
+                            </form>
+                        </td>
+
+                        <td th:with="textBox=${schedule.getId()}" th:id="textBox" th:data-id="${schedule.getId()}"
+                            class="Box">
+                            <div>
+                                <form th:name="resultaat">
+                                </form>
+                            </div>
+                        </td>
+                    </form>
+                </tr>
+            </tablebody>
+        </table>
+    </div>
+
+    <a th:href="@{/subject/list}" style="color:#2E3279;font-weight: bolder ">Terug Naar Vak Lijst</a>
+
+</div>
+
+</body>
+<script th:inline="javascript">
+
+    cohortnr = $('#cohort').val();
+    console.log(cohortnr);
+    dateDay = $('#dateDay').val();
+    console.log(dateDay);
+    day = $("#day").val();
+    console.log(day);
+    daypart = $('#daypart').val();
+    console.log(daypart);
+    const subjectField = document.querySelector(".subjectField");
+    rownumber = subjectField.dataset.id;
+    subjectname = $(".subjectField").val();
+    console.log("DIT rownumber: " + rownumber);
+    console.log("DIT IS DE SUBJECTNAAM: " + subjectname);
+
+    const staticValue = document.querySelector('#cohort').dataset.id;
+    console.log("DIT IS DE STATIC VALUE : " + staticValue);
+
+    <!--Select only the value that is selected in the dropdownmenu -->
+
+    $(".subjectField").on('change', function () {
+        subjectnumber = $(this).val();
+        console.log("The subjectnumber = " + subjectnumber);
+
+    });
+
+
+    $(".subjectField").change(function (e) {
+        console.log("DIT IS DE 2E STATIC VALUE : " + staticValue);
+        e.preventDefault();
+        thisId = $(this).data("id");
+        console.log("SAVEBUTTON_ID = :" + thisId);
+
+        var textBoxId = thisId - staticValue;
+        console.log("childElement = :" + textBoxId);
+        var x = document.getElementsByClassName("Box")[textBoxId];
+        console.log("elementBYClassName : " + x);
+
+
+        console.log(e);
+        $.ajax({
+            type: "POST",
+            url: "/subjectCohortCoupeling",
+            data: {
+                "cohortnr": document.getElementsByClassName("cohort")[textBoxId].value,
+                "dateDay": document.getElementsByClassName("date")[textBoxId].value,
+                "day": document.getElementsByClassName("day")[textBoxId].value,
+                "daypart": document.getElementsByClassName("daypart")[textBoxId].value,
+                "subjectnr": document.getElementsByClassName("subjectField")[textBoxId].value,
+                "scheduleId": thisId,
+                "button": "save"
+            },
+            success: function (result) {
+                if (result == "OK") {
+                    x.style.background = "SpringGreen";
+                    x.innerHTML = "OPGESLAGEN";
+                } else {
+                    x.style.background = "#ff4000";
+                    x.innerHTML = "iets anders dan ok";
+                }
+
+
+            },
+            error: function (result) {
+                alert('Er gaat iets fout');
+            }
+        });
+    });
+
+
+</script>
+</html>

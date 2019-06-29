@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <title>Docent Beschikbaarheid</title>
+    <style>
+        .NEE { background:red; }
+        .JA { background:green; }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloTeacher">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/teacherFTE">MIJN URENOVERZICHT</a></li>
+                    <li><a href="/showTasks">VACATURBEHEER</a></li>
+                    <li><a href="/applicationBasket">MIJN SOLLICITATIES</a></li>
+                    <li class="dropdown">
+                        <a href="https://www.jquery-az.com/bootstrap-tips-tutorials/" class="dropdown-toggle" data-toggle="dropdown" roleName="button" aria-haspopup="true" aria-expanded="false">MIJN VAK & ROOSTER VOORKEUREN <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/schedule/listCohort">Mijn Rooster Voorkeuren</a></li>
+                            <li><a href="/showSubjects">Mijn Vak Voorkeuren</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/exception/list">INCIDENTEN</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+<div class="container" th:each="temSchedule:${schedule}">
+
+    <h3>Docent Beschikbaarheid</h3>
+    <hr>
+
+    <a th:href="@{/schedule/updateSchedule(scheduleId=${temSchedule.id})}"
+       class="btn btn-primary btn-sm mb-3">
+        Rooster update
+    </a>
+
+    <table class="table table-dark " >
+
+
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Maandag</th>
+                <th scope="col">Dinsadag</th>
+                <th scope="col">Woensdag</th>
+                <th scope="col">Donderdadag</th>
+                <th scope="col">Vrijdag</th>
+            </tr>
+        </thead>
+
+        <tbody >
+        <tr >
+            <th scope="row">Ochtend</th>
+            <td th:class="${temSchedule.getMaandagOchtend()}" th:text="${temSchedule.getMaandagOchtend()}">...</td>
+            <td th:class="${temSchedule.getDinsdagOchtend()}" th:text="${temSchedule.getDinsdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getWoensdagOchtend()}" th:text="${temSchedule.getWoensdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getDonderdagOchtend()}" th:text="${temSchedule.getDonderdagOchtend()}">...</td>
+            <td th:class="${temSchedule.getVrijdagOchtend()}" th:text="${temSchedule.getVrijdagOchtend()}">...</td>
+        </tr>
+        <tr>
+            <th scope="row">Middag</th>
+            <td th:class="${temSchedule.getMaandagMiddag()}" th:text="${temSchedule.getMaandagMiddag()}">...</td>
+            <td th:class="${temSchedule.getDinsdagMiddag()}" th:text="${temSchedule.getDinsdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getWoensdagMiddag()}" th:text="${temSchedule.getWoensdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getDonderdagMiddag()}" th:text="${temSchedule.getDonderdagMiddag()}">...</td>
+            <td th:class="${temSchedule.getVrijdagMiddag()}" th:text="${temSchedule.getVrijdagMiddag()}">...</td>
+
+        </tr>
+        <tr>
+            <th scope="row">Avond</th>
+            <td th:class="${temSchedule.getMaandagAvond()}" th:text="${temSchedule.getMaandagAvond()}">...</td>
+            <td th:class="${temSchedule.getDinsdagAvond()}" th:text="${temSchedule.getDinsdagAvond()}">...</td>
+            <td th:class="${temSchedule.getWoensdagAvond()}" th:text="${temSchedule.getWoensdagAvond()}">...</td>
+            <td th:class="${temSchedule.getDonderdagAvond()}" th:text="${temSchedule.getDonderdagAvond()}">...</td>
+            <td th:class="${temSchedule.getVrijdagAvond()}" th:text="${temSchedule.getVrijdagAvond()}">...</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-secondary" th:href="@{/schedule/listCohort}">Terug Naar Cohort List</a>
+</div>
+<script src=""></script>
+</body>
+</html>

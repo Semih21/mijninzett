@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooster Updated</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+
+</head>
+<form>
+
+    <!-- Navigatie-menu -->
+    <nav class="navbar navbar-fixed-top navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="#">Mijn Inzet</a>
+
+            <ul class="nav">
+                <li class="navbar-link"><a class="nav-link" href="//localhost:8081/showTasks/">Ga naar vactureoverzicht</a>
+                </li>
+                <li class="navbar-link"><a class="nav-link" href="//localhost:8081/schedule/"> Ga naar weekrooster</a></li>
+                <li class="navbar-link"><a class="nav-link" href="//localhost:8081/hello">Ga naar hoofdmenu</a></li>
+            </ul>
+
+
+            <!--<table>-->
+            <!--<tr>-->
+            <!--<td>Select Cohort:</td>-->
+            <!--<td>-->
+            <!--<select th:field="{cohort}" name="cohort">-->
+            <!--<option value=""> &#45;&#45; </option>-->
+            <!--<option th:each="cohort : ${staffavailability}"-->
+            <!--th:value="${cohort.cohort}"-->
+            <!--th:text="${cohort.cohort}"></option>-->
+            <!--</select>-->
+
+            <!--</td>-->
+            <!--</tr>-->
+
+            <!--<tr>-->
+            <!--<td><input name="submit" type="submit" value="submit" />submit</td>-->
+            <!--</tr>-->
+            <!--</table>-->
+            <!--</form>-->
+
+
+        </div>
+    </nav>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/hello">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+        </button>
+    </div>
+
+    <div class = "container">
+        <div class="row">
+            <div class="col-md-2">
+                <table class="table table-hover" id="TaskTable7">
+                    <thead>
+                    <tr>
+                        <th scope="col">Dagdeel</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Ochtend</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Middag</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Avond</th>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+
+            <div class="col-md-2">
+                <table class="table table-hover" id="TaskTable">
+                    <tr>
+                        <th scope="col">Maandag</th>
+                    </tr>
+                    <tr th:each="maandag:${maandag}">
+                        <td th:text="${maandag.colorOption}">Maandag</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-2">
+                <table class="table table-hover" id="TaskTable2">
+                    <tr>
+                        <th scope="col">Dinsdag</th>
+                    </tr>
+                    <tr th:each="dinsdag:${dinsdag}">
+                        <td th:text="${dinsdag.colorOption}">Dinsdag</td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-2">
+                <table class="table table-hover" id="TaskTable3">
+                    <tr>
+                        <th scope="col">Woensdag</th>
+                    </tr>
+                    <tr th:each="woensdag:${woensdag}">
+                        <td th:text="${woensdag.colorOption}">Woensdag</td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-2">
+                <table class="table table-hover" id="TaskTable4">
+                    <tr>
+                        <th scope="col">Donderdag</th>
+                    </tr>
+                    <tr th:each="donderdag:${donderdag}">
+                        <td th:text="${donderdag.colorOption}">Donderdag</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-2">
+                <table class="table table-hover" id="TaskTable5">
+                    <tr>
+                        <th scope="col">Vrijdag</th>
+                    </tr>
+                    <tr th:each="vrijdag:${vrijdag}">
+                        <td th:text="${vrijdag.colorOption}">vrijdag</td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+
+        <!--<form action="#" th:action="@{schedule/updated" th:object="${staffavailibility}" method="put">-->
+
+            <!--<div class="row">-->
+                <!--<div class="col">-->
+                    <!--<input type="text" class="form-control" placeholder="Maandag"}>-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<input type="text" class="form-control" placeholder="Last name">-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<input type="text" class="form-control" placeholder="First name">-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<input type="text" class="form-control" placeholder="First name">-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<input type="text" class="form-control" placeholder="First name">-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                    <!--<input type="text" class="form-control" placeholder="First name">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</form>-->
+    </div>
+</form>
+
+
+
+</body>
+</html>

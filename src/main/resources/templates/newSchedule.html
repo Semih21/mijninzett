@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("td").click(function(){
+                if ($(this).hasClass('ROOD')) {
+                    $(this).removeClass('ROOD').addClass('GEEL');
+                } else if ($(this).hasClass('GEEL')) {
+                    $(this).removeClass('GEEL').addClass('GROEN');
+                } else if ($(this).hasClass('GROEN')) {
+                    $(this).removeClass('GROEN').addClass('ROOD');
+                }
+            })
+
+        })
+    </script>
+    <style>
+        .ROOD { background:red; }
+        .GEEL{ background:yellow; }
+        .GROEN { background:green; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-lg-4 col-lg-offset-4 ">
+
+<table class="table table-dark ">
+
+
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Maandag</th>
+        <th scope="col">Dinsadag</th>
+        <th scope="col">Woensdag</th>
+        <th scope="col">Donderdadag</th>
+        <th scope="col">Vrijdag</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <th scope="row">Ochtend</th>
+        <td th:class="${map1}">...</td>
+        <td th:class="${map4}">...</td>
+        <td th:class="${map7}">...</td>
+        <td th:class="${map10}">...</td>
+        <td th:class="${map13}">...</td>
+    </tr>
+    <tr>
+        <th scope="row">Middag</th>
+        <td th:class="${map2}">...</td>
+        <td th:class="${map5}">...</td>
+        <td th:class="${map8}">...</td>
+        <td th:class="${map11}">...</td>
+        <td th:class="${map14}">...</td>
+    </tr>
+    <tr>
+        <th scope="row">Avonds</th>
+        <td th:class="${map3}">...</td>
+        <td th:class="${map6}">...</td>
+        <td th:class="${map9}">...</td>
+        <td th:class="${map12}">...</td>
+        <td th:class="${map15}">...</td>
+    </tr>
+
+    </tbody>
+
+    </div>
+    </div>
+</table>
+    </table>
+    <button type="button" class="btn btn-primary " id="add-schedule">Opslaan</button>
+
+</body>
+
+
+
+
+
+
+
+</body>
+</html>

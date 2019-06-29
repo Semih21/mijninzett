@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Subject Toevoegen</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#update').on('click', function () {
+                var startdate = $('#startdate').val();
+                var enddaate= $('#enddate').val();
+                console.log("**** :"+enddaate);
+                if(startdate===""|| enddaate===""){
+                    alert("De startdatum of einddatum kunnen niet laag zijn");
+                    return false
+                }else{
+                    return true
+                }
+
+            });
+
+            $("#enddate").change(function () {
+                var startDate = document.getElementById("startdate").value;
+                var endDate = document.getElementById("enddate").value;
+
+                if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                    alert("De einddatum kan niet vroeger dan de startdatum zijn");
+                    document.getElementById("enddate").value = null;
+                }
+
+            });
+        })
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+    <p class="h4 mb-4">Update Cohort</p>
+
+    <form action="#" th:action="@{/cohort/save}"
+          th:object="${cohort}" method="POST" name="newSubjectForm">
+
+        <input type="hidden" th:field="*{cohortId}" />
+        <label class="form-group  ">
+            <label class="control-label" th:text="begindatum">Begindatum</label>
+            <div class="input-group">
+                <input type="date" class="form-control mb-4 col-12" id="startdate" name="beginDate"
+                       placeholder="MM/DD/YYY" th:field="*{beginDate}"/>
+            </div>
+        </label>
+
+        <label class="form-group  ">
+            <label class="control-label" th:text="einddatum">Einddatum</label>
+            <div class="input-group">
+                <input type="date" class="form-control mb-4 col-12" id="enddate" name="ëndDate"
+                       placeholder="MM/DD/YYY" th:field="*{endDate}"/>
+            </div>
+        </label>
+        <button type="submit" class="btn btn-success col-2" id="update">Update</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/cohort/createCohort}">Ga terug naar de cohort lijst </a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

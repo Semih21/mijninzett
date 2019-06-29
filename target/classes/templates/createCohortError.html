@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Mijn Inzet: foutmelding</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <title>Foutje</title>
+</head>
+<body>
+
+<form>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/helloAdmin">MIJN INZET HOME</a>
+        <!--<a class="nav-link" href="/showTasks">VACATUREBEHEER</a>-->
+        <a class="nav-link" href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a>
+        <a class="nav-link" href="/register">NIEUWE GEBRUIKER</a>
+        <a class ="nav-link" href="/cohort/createCohort">BEHEER COHORTEN</a>
+        <!--<a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>-->
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+            <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+        </form>
+    </nav>
+</form>
+
+<br><br>
+
+<h3>Dit cohort bestaat al. Ga terug!</h3>
+
+</body>
+</html>

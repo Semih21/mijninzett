@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Mijn Inzet: Cohort</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myclass.css}"/>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#addButton').on('click', function () {
+
+                var startdate = $('#beginDate').val();
+                var enddaate= $('#ëndDate').val();
+                console.log("**** :"+enddaate);
+                if(startdate===""|| enddaate===""){
+                    alert("De startdatum of einddatum kunnen niet leeg zijn");
+                    return false
+                }else{
+                    return true
+                }
+
+            });
+
+            $("#ëndDate").change(function () {
+                var startDate = document.getElementById("beginDate").value;
+                var endDate = document.getElementById("ëndDate").value;
+
+                if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                    alert("De einddatum kan niet vroeger dan de startdatum zijn");
+                    document.getElementById("ëndDate").value = null;
+                }
+
+            });
+        })
+    </script>
+
+</head>
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloAdmin">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/users/list">OVERZICHT & BEHEER GEBRUIKERS</a></li>
+                    <li><a href="/register">NIEUWE GEBRUIKER</a></li>
+                    <li><a href="/cohort/createCohort">BEHEER COHORTEN</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+<br><br>
+
+<div class="container">
+
+    <br>
+    <h3 style="color:#2E3279 ">Geef nieuw cohort op  </h3>
+    <hr>
+
+    <form action="#" th:action="@{/cohort/createCohort/new/}" th:object="${cohort}" method="post">
+
+        <label class="form-group ">
+            <label class="control-label"/> Cohort </label>
+        <div class="input-group">
+            <input type="number" class="form-control mb-4 col-12" id="cohortId" placeholder="Selecteer cohort"
+                   th:field="*{cohortId}"/>
+        </div>
+        </label>
+        <label class="form-group  ">
+            <label class="control-label" th:text="begindatum">Begindatum</label>
+            <div class="input-group">
+                <input type="date" class="form-control mb-4 col-12" id="beginDate" name="beginDate"
+                       placeholder="MM/DD/YYY" th:field="*{beginDate}"/>
+            </div>
+        </label>
+
+        <label class="form-group  ">
+            <label class="control-label" th:text="einddatum">Einddatum</label>
+            <div class="input-group">
+                <input type="date" class="form-control mb-4 col-12" id="ëndDate" name="ëndDate"
+                       placeholder="MM/DD/YYY" th:field="*{endDate}"/>
+            </div>
+        </label>
+        <div class="form-group ">
+            <button class="btn btn-lg btn-primary" onclick="f()" name="submit" type="submit" id="addButton">
+                Submit
+            </button>
+
+            <br>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+<br><br>
+
+<div class="container">
+<table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
+    <h3 style="color:#2E3279 ">Bestaande Cohorten</h3>
+
+    <thead style="background-color: #555D9C;color: white;!important;" >
+    <tr>
+        <th>Cohort</th>
+        <th> Begindatum</th>
+        <th> Einddatum</th>
+        <th> ###</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cohort:${allCohorts}">
+        <td th:text="${cohort.cohortId}">cohortid</td>
+        <td th:text="${#temporals.format(cohort.beginDate, 'dd/MMM/yyyy')}"> begindatum</td>
+        <td th:text="${#temporals.format(cohort.endDate, 'dd/MMM/yyyy')}">einddatum</td>
+
+        <td>
+            <a th:href="@{/cohort/updateCohort(cohortId=${cohort.cohortId})}"
+               class="btn btn-info btn-sm" >
+                Update
+            </a>
+
+            <a th:href="@{/cohort/deleteCohort(cohortId=${cohort.cohortId})}"
+               class="btn btn-danger btn-sm" onclick="if(!(confirm('Bent u zeker?')) ) return false">
+                Verwijderen
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+</div>
+
+
+<script th:inline="javascript">
+var waarschuwing = [[${letOp}]];
+function f() {
+    if ([[${letOp}]] ){
+        console.log("let op waarschuwing is gevuld");
+        alert("Let op, dit cohort bestaat al");
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>

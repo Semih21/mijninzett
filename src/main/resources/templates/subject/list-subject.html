@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            $('#cohortKopolen').on('click', function () {
+                var cohort = $('#cohort-dropdown').val();
+                console.log(cohort);
+                if(cohort==="NA"){
+                    alert("U moet een cohort kiezen");
+                    return false
+                }else{
+                    window.location.href='/subject/subjectCohortKopelen/'+cohort;
+                    return true
+                }
+
+            })
+        })
+    </script>
+    <title>Vakken managment</title>
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloCoordinator">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+<div class="container">
+
+
+    <h3>Vakken</h3>
+    <hr>
+
+    <a th:href="@{/subject/addSubject}"
+       class="btn btn-primary mb-6">
+        Vak Toevoegen
+    </a>
+
+
+    <a id="cohortKopolen" class="btn btn-success mb-4">
+        Vakken in cohort inplannen
+    </a>
+
+    <select id="cohort-dropdown">
+        <option value="NA">Kies Cohort</option>
+        <option th:each="tempCohort:${AAA}" th:text="${tempCohort.cohortId}">
+        </option>
+    </select>
+
+    <br>
+    <hr>
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
+        <thead style="background-color: #555D9C;color: white;!important;">
+        <tr>
+            <th>Subjet Naam</th>
+            <th>Gescahtte Uren</th>
+            <th>Bescrijving</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="temSubject : ${subjects}">
+
+
+            <td th:text="${temSubject.subjectName}"/>
+            <td th:text="${temSubject.estimatedHours}"/>
+            <td th:text="${temSubject.explanation}"/>
+
+            <td>
+                <a th:href="@{/subject/updateSubject(subjectId=${temSubject.subjectId})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+
+                <a th:href="@{/subject/deleteSubject(subjectId=${temSubject.subjectId})}"
+                   class="btn btn-danger btn-sm" onclick="if(!(confirm('Bent u zeker?')) ) return false">
+                    Verwijderen
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

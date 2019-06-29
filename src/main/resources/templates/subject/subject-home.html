@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var $subjects = $('#new-subject');
+            var $name = $('#name');
+            var $explanation = $('#explanation');
+            var $hour = $('#hour');
+            var tbody = $('#subjectBody');
+            var table = $('#subjectTable');
+            var $revove = $('.gly');
+            // var template=""+
+            //         "<li>"+
+            //         "<p>{{subjectName}}</p>"+
+            //         "<button data-id='{{subjectId}}' class='remove'>X</button>"+
+            //         "<button data-id='{{subjectId}}' class='glyphicon glyphicon-pencil'></button>"+
+            //         "</li>";
+            // function addSubject(subject){
+            //     $subjects.append(Mustache.render(template,subject))
+            // }
+
+            $.ajax({
+                type: 'GET',
+                url: '/vak/lijst',
+                dataType: 'json',
+                success: [
+                    function (subjects) {
+                        $.each(subjects, function (key, val) {
+                            tbody.append($("<tr>")
+                                .append($("<td>").append(val.subjectName))
+                                .append($("<td>").append(val.estimatedHours))
+                                .append($("<td>").append(val.explanation))
+                                .append($("<td>").append("<button  class='glyphicon glyphicon-remove delete'></button>"))
+                                .append($("<td>").append("<button data-id='{$subjectId}' class='glyphicon glyphicon-pencil edit'></button>"))
+                            );
+                        });
+                    }
+                ],
+                error:
+                    function () {
+                        alert("Error:" + error().text)
+
+                    }
+            });
+            $('#add-subject').on('click', function () {
+
+                var subject = {
+                    subjectName: $name.val(),
+                    explanation: $explanation.val(),
+                    estimatedHours: $hour.val()
+                };
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: 'POST',
+                    url: '/vak/addSubject',
+                    dataType: "json",
+                    data: JSON.stringify(subject),
+                    success: function (newSubject) {
+                        console.log(newSubject);
+                        tbody.append($("<tr>")
+                            .append($("<td>").append(newSubject.subjectName))
+                            .append($("<td>").append(newSubject.estimatedHours))
+                            .append($("<td>").append(newSubject.explanation))
+                            .append($("<td>").append("<button data-id='{{subjectID}}' class='glyphicon glyphicon-remove '></button>"))
+                            .append($("<td>").append("<button data-id='{{subjectID}}' class='glyphicon glyphicon-pencil '></button>"))
+                        );
+                    },
+                    error: function () {
+                        alert("error saving subject")
+                    }
+                })
+            });
+            tbody.delegate('.delete', 'click', function () {
+                alert("offf");
+                var $li = $(this).closest('li');
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'vak/deleteSubject/' + '37',
+                    success: function () {
+                        $li.remove();
+
+                    }
+                })
+            })
+
+
+        });
+    </script>
+
+
+    <title>Subject Directory</title>
+</head>
+<body>
+<div class="container">
+    <h1>Vak Directory</h1>
+    <h2>Vakken</h2>
+    <table id="subjectTable" class="table table-bordered table-striped table-hover" style="background-color:white">
+        <thead style="background-color: mediumpurple">
+        <tr>
+            <th>Naam</th>
+            <th>Geschatte Uur</th>
+            <th>Beschrijving</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="subjectBody">
+        </tbody>
+    </table>
+    <ul id="new-subject">
+
+    </ul>
+    <form>
+        <h4>Voeg Nieuwe Vak Toe</h4>
+        <div class="form-group">
+            <p><input type="text" id="name" placeholder="Naam van Subject"></p>
+            <p><input type="text" id="explanation" placeholder="Beschrijving"></p>
+            <p><input type="number" id="hour" placeholder="Geschatte Uren"></p>
+            <button id="add-subject">Toevoeg</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+directory at which the site runs
+http://localhost:8081/hello
+
+MainClassNotFoundException oplossen na refractoren package name na 'java':
+Menublak --> Run --> Edit Configurations
+Vul het volgende in achter 'Main class:': com.mijninzet.projectteamdrie.RunApplication
+Druk op Apply
+Nu is het path aangepast...
+
+2019-11-06
+Wanneer je de database hebt gedropt en opnieuw aangemaakt en ook een clean pull hebt gedaan vanaf git:
+Doe het volgende:
+- Setup SDK en import as Maven Project
+- In de UserServiceImp: Verander de rol in 'ADMIN'
+- Maak een nieuwe database aan met naam: mijn_inzet
+- Run noPressure in Java:
+    - Dit zorgt dat de juiste tabellen in de database worden aangemaakt
+    - Insert de data voor Role in de Role tabel in de database
+    - Ga naar: http://localhost:8081/register
+    - Maak een nieuwe gebruiker met rol 'ADMIN' aan.
+    - loop door de rest van de applicatie
+- Om een gebruiker met een andere rol aan te maken: Verander deze in UserServiceImp

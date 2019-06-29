@@ -1,0 +1,28 @@
+
+
+ .Gallery-media img {
+    min-height: 200px;
+    min-width: 200px;
+}
+.Gallery-media img {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #000;
+}
+img {
+
+    border-radius: 50%;
+}
+.Gallery-media {
+    background: #10171e;
+    border-radius: 0;
+    line-height: 0;
+    min-height: 200px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+body{
+    background-image: url("images/achtergrond.jpg");
+}

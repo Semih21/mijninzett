@@ -1,0 +1,45 @@
+// From user controller:
+//    @RequestMapping(value = "/update", method = RequestMethod.GET)
+//    public ModelAndView update(@ModelAttribute("user") User theUser) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        List<Role> rolelist = roleRepository.findAll();
+//        modelAndView.addObject("roles", rolelist);
+//        modelAndView.addObject("user", theUser);
+//        modelAndView.setViewName("updateUser"); // resources/template/newUser.html
+//        System.out.println("! ViewName from ModelandView from updatemethod: " + modelAndView.getViewName());
+//        return modelAndView;
+//    }
+
+
+//    public String registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        // Check for the validations
+////        if(bindingResult.hasErrors()) {
+////            modelAndView.addObject("successMessage", "Please correct the errors in form!");
+////            modelMap.addAttribute("bindingResult", bindingResult);
+////        }
+////        else if(userService.isUserAlreadyPresent(user)){
+////            modelAndView.addObject("successMessage", "user already exists!");
+////        }
+////        // we will update the user if, no binding errors
+////        else {
+////            userService.saveUser(user);
+////            modelAndView.addObject("successMessage", "User is updated successfully!");
+////        }
+//        modelAndView.setViewName("updateUser");
+//        return "redirect:/users/list";
+//    }
+
+
+//    @PostMapping("/save")
+//    public String save(@ModelAttribute("user") User theUser, Model model) {
+//        userService.saveUser(theUser);
+//        return "redirect:/users/list";
+//    }
+//
+//    @RequestMapping(value = "/roles", method = RequestMethod.GET)
+//    public String getAllRoles(Model model) {
+//        List<Role> rolelist = roleRepository.findAll();
+//        model.addAttribute("roles", rolelist);
+//        return ("registerUser");
+//    }

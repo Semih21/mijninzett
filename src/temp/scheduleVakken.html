@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- Navigatie-menu -->
+<nav class="navbar navbar-dark bg-dark">
+    <a class="nav-link" href="/helloTeacher">MIJN INZET HOME</a>
+    <a class="nav-link" href="/showTasks">VACATUREBEHEER</a>
+    <a class="nav-link" href="/applicationBasket">MIJN SOLLICITATIES</a>
+    <a class="nav-link" href="/scheduleVakken">ROOSTERBEHEER-VAKKEN</a>
+    <a class="nav-link" href="/schedule">ROOSTERBEHEER-TIJD</a>
+    <a class="nav-link" href="/showSubjects">VAKKENBEHEER</a>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Log Out</button>
+        <!--    <a class="nav-link" type="submit">UITLOGGEN</a>-->
+    </form>
+</nav>
+
+<div class="container">
+
+    <!--    <tr th:each="staffavailability:${schedules}">-->
+    <!--        <td th:text="${staffavailability.cohort}">dag</td>-->
+
+    <!--    </tr>-->
+
+    <p class="container">
+
+    <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Cohort
+        </button>
+
+        <form action="/schedule" method="POST">
+            <button type="submit">Create new schedule</button>
+        </form>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+
+    <!--    <tr th:each="schedule : ${staffavailability}">-->
+    <!--        <td th:text="${schedule.id}"> </td>-->
+    <!--        <td><a href="#" th:text="${schedule.day}"> ...</a></td>-->
+    <!--        <td th:text="${schedule.cohort}"> ...</td>-->
+    <!--    </tr>-->
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">dagdeel</th>
+            <th scope="col">maandag</th>
+            <th scope="col">dinsdag</th>
+            <th scope="col">woensdag</th>
+            <th scope="col">donderdag</th>
+            <th scope="col">vrijdag</th>
+            <th scope="col">zaterdag</th>
+            <th scope="col">zondag</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">ochtend</th>
+            <td>Wiskunde</td>
+            <td>Programmeren</td>
+            <td>Programmeren</td>
+            <td>Advanced Programming</td>
+            <td>Advanced Programming</td>
+
+
+            <!--        <tr th:each= "schedule : ${staffavailability}">-->
+            <!--        <td th:text="${schedule.colorOption}">  </td>-->
+            <!--            <td th:text="${schedule.colorOption}">  </td>-->
+            <!--            <td th:text="${schedule.colorOption}">  </td>-->
+
+            <!--        </td>-->
+            <!--        </tr>-->
+        <tr>
+            <th scope="row">begin middag</th>
+            <td>Databases</td>
+            <td>Databases</td>
+            <td>OOP</td>
+            <td>Advanced Programming</td>
+            <td>Advanced Programming</td>
+        </tr>
+        <tr>
+            <th scope="row">eind middag</th>
+            <td>Vrij</td>
+            <td>OOP</td>
+            <td>Advanced Programming</td>
+            <td>Advanced Programming</td>
+            <td>Vrij</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

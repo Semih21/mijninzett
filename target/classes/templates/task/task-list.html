@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            $('#cohortKopolen').on('click', function () {
+                var cohort = $('#cohort-dropdown').val()
+                console.log(cohort)
+                if(cohort==="NA"){
+                    alert("U moet een cohort kiezen")
+                    return false
+                }else{
+                    window.location.href='/subject/subjectCohortKopelen/'+cohort;
+                    return true
+                }
+
+            })
+        })
+    </script>
+    <title>Vakken managment</title>
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/helloCoordinator">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-primary">Log Out</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+<div class="container">
+
+
+    <h3>Vacature Overzicht</h3>
+    <hr>
+
+    <a th:href="@{/task/newTask}"
+       class="btn btn-primary mb-6">
+        Vacature Toevoegen
+    </a>
+
+    <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
+        <thead style="background-color: #555D9C;color: white;!important;">
+        <tr>
+            <th>Vacature Naam</th>
+            <th>Gescahtte Uren</th>
+            <th>Jaren tot Datum van Verloop</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="temTask : ${tasks}">
+
+
+            <td th:text="${temTask.taskName}"/>
+            <td th:text="${temTask.estimatedHours}"/>
+            <td th:text="${temTask.yearsToExpiryDate}"/>
+
+            <td>
+                <a th:href="@{/task/updateTask(taskId=${temTask.taskId})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+
+                <a th:href="@{/task/deleteTask(taskId=${temTask.taskId})}"
+                   class="btn btn-danger btn-sm" onclick="if(!(confirm('Bent u zeker?')) ) return false">
+                    Verwijderen
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

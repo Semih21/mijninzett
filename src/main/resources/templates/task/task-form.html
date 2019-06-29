@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Subject Toevoegen</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function numberCheck(){
+            var value , text;
+            value=document.getElementById("estimatedHours").value;
+
+
+            if(isNaN(value)){
+                alert("Geschatte uren moeten nummer zijn")
+                return false;
+            }else {
+                return true;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+    <p class="h4 mb-4">Een vak toevoegen</p>
+
+    <form action="#" th:action="@{/task/taskSave}"
+          th:object="${task}" method="POST" name="newSubjectForm" onsubmit="return numberCheck()">
+
+        <input type="hidden" th:field="*{taskId}" />
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-small">Naam</span>
+            </div>
+            <input type="text" id="namw" th:field="*{taskName}"
+                   class="form-control" aria-label="Naam"  required="required">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Geschatte Uren</span>
+            </div>
+            <input type="number" id="estimatedHours" th:field="*{estimatedHours}"
+                   class="form-control" aria-label="Geschatte Uren"  required="required" name="estimatedHours">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Jaren tot Verloopdatum</span>
+            </div>
+            <input type="number" id="explatanation" th:field="*{yearsToExpiryDate}"
+                   class="form-control" aria-label="Jaren tot Verloopdatum"  required="required">
+        </div>
+
+        <!--<input type="number" id="explatanation" th:field="*{yearsToExpiryDate}"-->
+               <!--class="form-control mb-4 col-4" placeholder="Ervaring Jaren" required="required">-->
+
+        <button type="submit" class="btn btn-success col-2" onclick="numberCheck()">Voeg toe</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/taskList}">Ga terug naar de Vacature Overzicht</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
