@@ -55,24 +55,14 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         // Haal de ingelogde email adres op en bepaal de user ID:
         String emailLoginUser = authentication.getName();
        int loggedInUserId = userRepo.getIdLoggedInUser(emailLoginUser);
-        System.out.println("de email vd ingelogde persoon is -----> : " + emailLoginUser);
-        System.out.println("De id die opgehaald is mbv de authentication.getName : ---->" + loggedInUserId);
-
         //set  userId in UserSingleton Class
-        System.out.println("de count is nu: " +UserSingleton.getInstance().getCount() );
        UserSingleton.getInstance().setId(loggedInUserId);
-        System.out.println("de user id die opgehaald is via Singleton gettter  ----> : " + UserSingleton.getInstance().getId());
-        System.out.println("de count is nu: " +UserSingleton.getInstance().getCount() );
-
         //set user met loggedInUserId tbv weergave in de welkomstscherm html
         User.setCurrentUserId(loggedInUserId);
         // end Brahim Code
 
-
         // check user role and decide the redirect URL
-
         url = "/welcomeScreen";
-
 
         return url;
     }

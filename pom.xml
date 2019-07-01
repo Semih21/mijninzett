@@ -10,12 +10,13 @@
 
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
-<parent>
-    <groupId>com.sw.system4</groupId>
-    <artifactId>system4-parent</artifactId>
-    <version>${system4.version}</version>
-    <relativePath>../pom.xml</relativePath>  <!-- this must match your parent pom location -->
-</parent>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,6 +94,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
         </plugins>
     </build>

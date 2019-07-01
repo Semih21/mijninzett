@@ -70,15 +70,5 @@ public interface StaffAvailibilityRepository extends CrudRepository<StaffAvailab
     String getFridayNoon(@Param("cohortId") Integer cohortId, @Param("teacherId") Integer teacherId);
 
 
-
-//
-//    List<StaffAvailability> findAll();
-//
-//    List<StaffAvailability> findAllByCohort(String cohort);
-//
-//    List<StaffAvailability> findAllByUserIdAndCohort(int id, int cohort);
-//
-
-
 }
 

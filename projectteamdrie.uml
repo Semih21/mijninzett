@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.mijninzet.projectteamdrie</OriginalElement>
+  <nodes>
+    <node x="423.0" y="1420.0">com.mijninzet.projectteamdrie.repository.TaskApplicationRepository</node>
+    <node x="1159.0" y="1860.0">com.mijninzet.projectteamdrie.model</node>
+    <node x="1197.0" y="1420.0">com.mijninzet.projectteamdrie.repository.CohortRepository</node>
+    <node x="1132.0" y="1765.0">com.mijninzet.projectteamdrie.RunApplication</node>
+    <node x="0.0" y="918.0">com.mijninzet.projectteamdrie.controller.CohortController</node>
+    <node x="936.0" y="1420.0">com.mijninzet.projectteamdrie.controller.UserRestController</node>
+    <node x="429.0" y="537.0">com.mijninzet.projectteamdrie.controller.subjectcontroller.SubjectWebController</node>
+    <node x="1049.0" y="1604.0">com.mijninzet.projectteamdrie.controller.MyCustomErrorController</node>
+    <node x="1120.0" y="918.0">com.mijninzet.projectteamdrie.controller.StaffAvailibilityController</node>
+    <node x="1344.0" y="1765.0">com.mijninzet.projectteamdrie.repository.AdministratorRepository</node>
+    <node x="0.0" y="1604.0">com.mijninzet.projectteamdrie.repository.TeacherHoursRepository</node>
+    <node x="356.0" y="1604.0">com.mijninzet.projectteamdrie.repository.SubjectPreferenceRepository</node>
+    <node x="0.0" y="1765.0">com.mijninzet.projectteamdrie.MijninzetprojectteamdrieApplicationTests</node>
+    <node x="749.0" y="918.0">com.mijninzet.projectteamdrie.controller.TaskController</node>
+    <node x="750.0" y="1191.0">com.mijninzet.projectteamdrie.controller.WelcomeScreenController</node>
+    <node x="947.0" y="537.0">com.mijninzet.projectteamdrie.controller.TeacherHoursController</node>
+    <node x="0.0" y="1420.0">com.mijninzet.projectteamdrie.controller.TaskApplicationController</node>
+    <node x="0.0" y="1860.0">com.mijninzet.projectteamdrie.repository.SchedulerRepository</node>
+    <node x="0.0" y="537.0">com.mijninzet.projectteamdrie.repository.StaffAvailibilityRepository</node>
+    <node x="1635.0" y="1765.0">com.mijninzet.projectteamdrie.repository.TechSupportRepository</node>
+    <node x="1329.0" y="0.0">com.mijninzet.projectteamdrie.repository.CohortScheduleRepository</node>
+    <node x="427.0" y="918.0">com.mijninzet.projectteamdrie.controller.UserController</node>
+    <node x="919.0" y="0.0">com.mijninzet.projectteamdrie.controller.CohortScheduleController</node>
+    <node x="1568.0" y="1604.0">com.mijninzet.projectteamdrie.repository.RoleRepository</node>
+    <node x="763.0" y="1604.0">com.mijninzet.projectteamdrie.repository.ExceptionRepository</node>
+    <node x="0.0" y="1191.0">com.mijninzet.projectteamdrie.controller.subjectcontroller.SubjectRestController</node>
+    <node x="1499.0" y="1420.0">com.mijninzet.projectteamdrie.repository.UserRepository</node>
+    <node x="503.0" y="1860.0">com.mijninzet.projectteamdrie.repository.ManagerRepository</node>
+    <node x="1041.0" y="1191.0">com.mijninzet.projectteamdrie.repository.SubjectRepository</node>
+    <node x="1342.0" y="1604.0">com.mijninzet.projectteamdrie.repository.TaskRepository</node>
+    <node x="0.0" y="0.0">com.mijninzet.projectteamdrie.controller.AuthenticationController</node>
+    <node x="806.0" y="1765.0">com.mijninzet.projectteamdrie.repository.TeacherScheduleRepository</node>
+    <node x="1403.0" y="1191.0">com.mijninzet.projectteamdrie.controller.SubjectPreferencesController</node>
+    <node x="436.0" y="1191.0">com.mijninzet.projectteamdrie.controller.ExceptionController</node>
+    <node x="741.0" y="1860.0">com.mijninzet.projectteamdrie.security</node>
+    <node x="256.0" y="1860.0">com.mijninzet.projectteamdrie.repository.LocationRepository</node>
+    <node x="440.0" y="1765.0">com.mijninzet.projectteamdrie.repository.ConfirmationTokenRepository</node>
+    <node x="954.0" y="1860.0">com.mijninzet.projectteamdrie.service</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Tree" zoom="0.6295552367288378" x="519.5" y="326.0" />
+  <SelectedNodes>
+    <node>com.mijninzet.projectteamdrie.repository.TaskApplicationRepository</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

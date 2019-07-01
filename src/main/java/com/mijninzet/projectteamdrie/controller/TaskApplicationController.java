@@ -24,7 +24,6 @@ public class TaskApplicationController {
 
     @PostMapping(value = "/taskApplications/{taskId}/{availableHours}")
     public String insertTaskAppl(HttpServletRequest request, ModelMap model) {
-        System.out.println("methode is aangeroepen!");
         //testwaarde for userId is 1; totdat userid uit html gelezen kan worden
         LocalDate todaysDate = LocalDate.now();
         //get the data from httpservletRequest and put in variable
@@ -36,11 +35,6 @@ public class TaskApplicationController {
             int hours = Integer.parseInt(tempHours);
             //haal de userId op vd loggedin user uit de Singleton
             final int userId = UserSingleton.getInstance().getId();
-
-            System.out.println("de ingelezen taskid waarde is: " + taskId);
-            System.out.println("de ingelezen availableHours waarde is: " + hours);
-
-
             // insert the data into database
             taskApplicationRepo.insertTaskapplication(userId, todaysDate, null, hours, "Docent", taskId);
 
@@ -61,10 +55,6 @@ public class TaskApplicationController {
         String tempHours = request.getParameter("availHours");
         String updateAction = request.getParameter("updateAppl");
         String deleteAction = request.getParameter("removeAppl");
-        System.out.println("taskid retrieved from applicationBasket " + tempId);
-        System.out.println("name  retrieved from applicationBasket " + fullName);
-        System.out.println("nrHours retrieved from applicationBasket " + tempHours);
-
         //Convert variable to int
         if (tempHours.matches("^[0-9]+$")) {
             int taskId = Integer.parseInt(tempId);
@@ -75,14 +65,10 @@ public class TaskApplicationController {
 
             //take action based on which button was clicked
             if (updateAction != null) {
-
-                System.out.println("De user_id is ---> " + userId);
                 taskApplicationRepo.updateHours(hours, userId, taskId);
-                System.out.println("De UPDATE Methode is aangeroepen");
 
             } else if (deleteAction != null) {
                 taskApplicationRepo.deleteApplication(taskId, userId);
-                System.out.println("De DELETE Methode is aangeroepen");
 
             } else {
                 System.out.println("ER GAAT IETS FOUT--> GEEN BUTTON IS GEKLIKT!!");
@@ -107,7 +93,6 @@ public class TaskApplicationController {
 
         //model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview());
         model.addAttribute("applicationBasket", taskApplicationRepo.getApplicationOverview(userId));
-        System.out.println("INHOUD VH OBJECT: ---> " + taskApplicationRepo.getApplicationOverview(userId).toString());
         return "applicationBasket";
     }
 }

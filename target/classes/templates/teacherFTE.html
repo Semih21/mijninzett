@@ -160,11 +160,11 @@
         request.send(cohortId);
 
         request.onload = function () {
-            if (request.status == 200) { // analyze HTTP status of the response
+            if (request.status == 200) {
 
                 console.log(`Done, got ${request.response.length} bytes`);
                 // haal de data uit de request
-                let weken = JSON.parse(request.response); // de data is in ASCII format, nu nog naar object omzetten
+                let weken = JSON.parse(request.response);
                 let option;
                 for (let i = 0; i < weken.length; i++) {
                     option = document.createElement('option');
@@ -186,8 +186,6 @@
         var cohortId = $('#cohortId').val();
 
 
-
-
         let request = new XMLHttpRequest();
         request.open('GET', '/teacherSchedule/week/' + weekselected +'/' + cohortId, true);
         request.setRequestHeader('Content-Type', 'application/json');
@@ -207,7 +205,7 @@
         function getList(list) {
             tbody.empty();
             $.each(list, function (key, val) {
-                if(val.subject == null) {alert("Let op: het rooster is nog niet rond. U krijgt inzage als de roosteraar klaar is.")}
+                if(val.subject == null) {alert("Let op: het rooster is nog helemaal niet rond. Check op later tijdstip opnieuw voor het volledige rooster")}
                 console.log("In list zit:" + list);
                     tbody.append($("<tr>")
                         .append($("<td>").append(val.date))

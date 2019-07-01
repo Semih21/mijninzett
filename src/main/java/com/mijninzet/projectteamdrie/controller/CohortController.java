@@ -49,11 +49,6 @@ public class CohortController {
         cohort.setEndDate(cohort.getEndDate());
         cohortRepository.save(cohort);
         // maak nieuwe CohortSchedule (default rooster) voor de nieuwe Cohort
-        System.out.println("De begindateum= " + cohort.getBeginDate());
-        System.out.println("De begindateum= " + cohort.getEndDate());
-        System.out.println("De cohort= " + cohort.getCohortId());
-        System.out.println("De begindateum in de makeSchedule =  " + cohort.getBeginDate());
-        System.out.println("De begindateum in de makeSchedule =  " + cohort.getEndDate());
         makeDefaultCohortSchedule(cohort.getBeginDate(), cohort.getEndDate(), cohort.getCohortId());
         return ("redirect:/cohort/createCohort");
     }
